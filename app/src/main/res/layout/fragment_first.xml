@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FirstFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <Button
+            android:id="@+id/button_first"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Daily Summary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="60dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:text="@string/select_an_emotion_from_the_emoticon_buttons_below"
+                android:gravity="center"
+                android:textSize="30sp"
+                />
+
+            <Button
+                android:id="@+id/HappyButton"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:text="Happy 😊"
+                android:layout_weight="1"/>
+            <Button
+                android:id="@+id/SadButton"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:text="Sad 😞"
+                android:layout_weight="1"/>
+            <Button
+                android:id="@+id/AngryButton"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:text="Angry 😡"
+                android:layout_weight="1"/>
+            <Button
+                android:id="@+id/ExcitedButton"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:text="Excited 😁"
+                android:layout_weight="1"/>
+            <Button
+                android:id="@+id/GratefulButton"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:text="Grateful 🙏"
+                android:layout_weight="1"/>
+            <Button
+                android:id="@+id/FearButton"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:text="Fear 😨"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
