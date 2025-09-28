@@ -30,6 +30,9 @@ public class SecondFragment extends Fragment {
     private FragmentSecondBinding binding;
     private ArrayList<Emoticon> allEmoticons = FirstFragment.getAllEmoticons();
     private ArrayAdapter<String> emoticonAdapter;
+    private DateFormatter dateFormatter;
+    private TablePopulator tablePopulator;
+    private ProcessAllEmoticons emoticonDataProcessor;
 
     @Override
     public View onCreateView(
@@ -45,10 +48,25 @@ public class SecondFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Initial setup for date and emoticon list
-        setupInitialData();
+        dateFormatter = new DateFormatter("yyyy/MM/dd", Locale.getDefault());
+        tablePopulator = new TablePopulator(requireContext());
+        allEmoticons = FirstFragment.getAllEmoticons();
+        emoticonDataProcessor = new ProcessAllEmoticons(allEmoticons);
 
-        // Handle set date button click
+        setupUI();
+        setupListeners();
+        initializeData();
+    }
+
+    private void setupUI() {
+        // Populate emoticon list
+        ArrayList<String> emoticonStrings = emoticonDataProcessor.formatEmoticons();
+        emoticonAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, emoticonStrings);
+        binding.emoticonList.setAdapter(emoticonAdapter);
+    }
+
+    private void setupListeners() {
+        // Handle set date button click to use the typed date
         binding.setDateButton.setOnClickListener(v -> {
             String newDate = binding.selectedDateEditText.getText().toString();
             updateSummaryForDate(newDate);
@@ -60,57 +78,28 @@ public class SecondFragment extends Fragment {
         );
     }
 
-    private void setupInitialData() {
-        // Initialize with today's date
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
-        String formattedDate = dateFormat.format(calendar.getTime());
-        binding.selectedDateEditText.setText(formattedDate);
-        binding.selectedDateTextView.setText(formattedDate);
-
-        // Populate emoticon list
-        ProcessAllEmoticons processor = new ProcessAllEmoticons(allEmoticons);
-        ArrayList<String> emoticonStrings = processor.formatEmoticons();
-        emoticonAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, emoticonStrings);
-        binding.emoticonList.setAdapter(emoticonAdapter);
+    private void initializeData() {
+        // Initialize with today's date and set it to the EditText/TextView
+        String todayDate = dateFormatter.formatDate(Calendar.getInstance().getTime());
+        binding.selectedDateEditText.setText(todayDate);
+        binding.selectedDateTextView.setText(todayDate);
 
         // Update summary for the initial date
-        updateSummaryForDate(formattedDate);
+        updateSummaryForDate(todayDate);
     }
 
     private void updateSummaryForDate(String date) {
-        ProcessAllEmoticons processor = new ProcessAllEmoticons(allEmoticons);
-        ArrayList<Pair<String, String>> emoticonProcessed = processor.processEmoticons();
-        binding.selectedDateTextView.setText(date);
+        binding.selectedDateTextView.setText(date); // Update the displayed date
 
+        // Process emoticon array into strings
+        ArrayList<Pair<String, String>> emoticonProcessed = emoticonDataProcessor.processEmoticons();
         DisplaySummary summaryDisplay = new DisplaySummary(emoticonProcessed);
+        // get summary stats for target date
         HashMap<String, String> summary = summaryDisplay.getSummaryForDate(date);
-        Log.d("SecondFragment", "Summary for date " + date + ": " + summary.toString());
 
-        populateTable(summary);
-    }
+        ArrayList<TableRow> rows = tablePopulator.populate(binding.dataTableLayout, summary);
 
-    private void populateTable(HashMap<String, String> summary) {
-        // First, clear any existing rows from the table, leaving the header
-        binding.dataTableLayout.removeViews(1, binding.dataTableLayout.getChildCount() - 1);
-
-        for (String emoticon : summary.keySet()) {
-            String summaryText = summary.get(emoticon);
-
-            TableRow row = new TableRow(requireContext());
-            row.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
-
-            TextView emoticonTextView = new TextView(requireContext());
-            emoticonTextView.setText(emoticon);
-            emoticonTextView.setPadding(8, 8, 8, 8);
-
-            TextView countFrequencyTextView = new TextView(requireContext());
-            countFrequencyTextView.setText(summaryText);
-            countFrequencyTextView.setPadding(8, 8, 8, 8);
-
-            row.addView(emoticonTextView);
-            row.addView(countFrequencyTextView);
-
+        for (TableRow row : rows) {
             binding.dataTableLayout.addView(row);
         }
     }
