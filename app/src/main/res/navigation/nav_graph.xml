@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.example.aarizvi2_emotilog.FirstFragment"
+        android:name="com.example.aarizvi2_emotilog.EmoticonFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_first">
 
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.example.aarizvi2_emotilog.SecondFragment"
+        android:name="com.example.aarizvi2_emotilog.LogSummaryFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_second">
 

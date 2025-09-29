@@ -1,8 +1,9 @@
 package com.example.aarizvi2_emotilog;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Emoticon {
+public class Emoticon implements Serializable {
     private String emotion;
     private Date date;
 

@@ -1,34 +1,29 @@
 package com.example.aarizvi2_emotilog;
 
-import android.app.DatePickerDialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.TableRow;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.aarizvi2_emotilog.databinding.FragmentSecondBinding;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 
-public class SecondFragment extends Fragment {
+public class LogSummaryFragment extends Fragment {
 
     private FragmentSecondBinding binding;
-    private ArrayList<Emoticon> allEmoticons = FirstFragment.getAllEmoticons();
+    private EmoticonViewModel viewModel;
     private ArrayAdapter<String> emoticonAdapter;
     private DateFormatter dateFormatter;
     private TablePopulator tablePopulator;
@@ -50,8 +45,8 @@ public class SecondFragment extends Fragment {
 
         dateFormatter = new DateFormatter("yyyy/MM/dd", Locale.getDefault());
         tablePopulator = new TablePopulator(requireContext());
-        allEmoticons = FirstFragment.getAllEmoticons();
-        emoticonDataProcessor = new ProcessAllEmoticons(allEmoticons);
+        viewModel = new ViewModelProvider(requireActivity()).get(EmoticonViewModel.class);
+        emoticonDataProcessor = new ProcessAllEmoticons(viewModel.getAllEmoticons());
 
         setupUI();
         setupListeners();
@@ -73,7 +68,7 @@ public class SecondFragment extends Fragment {
         });
 
         binding.buttonSecond.setOnClickListener(v ->
-                NavHostFragment.findNavController(SecondFragment.this)
+                NavHostFragment.findNavController(LogSummaryFragment.this)
                         .navigate(R.id.action_SecondFragment_to_FirstFragment)
         );
     }
@@ -89,12 +84,17 @@ public class SecondFragment extends Fragment {
     }
 
     private void updateSummaryForDate(String date) {
-        binding.selectedDateTextView.setText(date); // Update the displayed date
+        binding.selectedDateTextView.setText(date);
 
-        // Process emoticon array into strings
+        // Get the latest emoticon data from the ViewModel each time.
+        ArrayList<Emoticon> allEmoticons = viewModel.getAllEmoticons();
+        ProcessAllEmoticons emoticonDataProcessor = new ProcessAllEmoticons(allEmoticons);
+
+        // Clear existing views from the table to prevent duplicates.
+        binding.dataTableLayout.removeAllViews();
+
         ArrayList<Pair<String, String>> emoticonProcessed = emoticonDataProcessor.processEmoticons();
         DisplaySummary summaryDisplay = new DisplaySummary(emoticonProcessed);
-        // get summary stats for target date
         HashMap<String, String> summary = summaryDisplay.getSummaryForDate(date);
 
         ArrayList<TableRow> rows = tablePopulator.populate(binding.dataTableLayout, summary);

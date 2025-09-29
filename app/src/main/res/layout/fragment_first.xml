@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FirstFragment">
+    tools:context=".EmoticonFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
             android:id="@+id/button_first"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Daily Summary"
+            android:text="Daily Summary and Logs"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -29,9 +29,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+            <Button
+                android:id="@+id/clear_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Clear Data"
+
+                />
+
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="100dp"
                 android:text="@string/select_an_emotion_from_the_emoticon_buttons_below"
                 android:gravity="center"
                 android:textSize="30sp"
@@ -40,37 +49,37 @@
             <Button
                 android:id="@+id/HappyButton"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="110dp"
                 android:text="Happy 😊"
                 android:layout_weight="1"/>
             <Button
                 android:id="@+id/SadButton"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="110dp"
                 android:text="Sad 😞"
                 android:layout_weight="1"/>
             <Button
                 android:id="@+id/AngryButton"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="110dp"
                 android:text="Angry 😡"
                 android:layout_weight="1"/>
             <Button
                 android:id="@+id/ExcitedButton"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="110dp"
                 android:text="Excited 😁"
                 android:layout_weight="1"/>
             <Button
                 android:id="@+id/GratefulButton"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="110dp"
                 android:text="Grateful 🙏"
                 android:layout_weight="1"/>
             <Button
                 android:id="@+id/FearButton"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="110dp"
                 android:text="Fear 😨"
                 android:layout_weight="1"/>
 
