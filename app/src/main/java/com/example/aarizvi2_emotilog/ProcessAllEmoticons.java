@@ -26,12 +26,23 @@ public class ProcessAllEmoticons {
         return emoticonData;
     }
 
+    public ArrayList<String> getEmoticonTimes() {
+        ArrayList<String> emoticonTimes = new ArrayList<>();
+        for (int i = 0; i < allEmoticons.size(); i++) {
+            Emoticon currentEmoticon = allEmoticons.get(i);
+            emoticonTimes.add(currentEmoticon.getTime());
+        }
+        return emoticonTimes;
+    }
+
     public ArrayList<String> formatEmoticons() {
         ArrayList<Pair<String, String>> emoticonPairs = processEmoticons();
+        ArrayList<String> emoticonTimes = getEmoticonTimes();
         ArrayList<String> emoticonStrings = new ArrayList<>();
-        for (Pair<String, String> pair : emoticonPairs) {
+        for (int i = 0; i < emoticonPairs.size(); i++) {
             // Format the output string for each pair to be user-friendly
-            emoticonStrings.add(pair.first + " on " + pair.second);
+            emoticonStrings.add(emoticonPairs.get(i).first + " on " +
+                    emoticonPairs.get(i).second + " at " + emoticonTimes.get(i));
         }
 
         return emoticonStrings;

@@ -1,15 +1,20 @@
 package com.example.aarizvi2_emotilog;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class Emoticon implements Serializable {
     private String emotion;
     private Date date;
+    private String timestring;
 
     public Emoticon(String emotion, Date date) {
         this.emotion = emotion;
         this.date = date;
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+        this.timestring = timeFormat.format(date);
     }
 
     public String getEmotion() {
@@ -27,4 +32,6 @@ public class Emoticon implements Serializable {
     public void setDate(Date date) {
         this.date = date;
     }
+
+    public String getTime() {return timestring;}
 }
