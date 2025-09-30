@@ -20,6 +20,9 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 
+/*
+Fragment to display the emoticon log, as well as the by date summary.
+ */
 public class LogSummaryFragment extends Fragment {
 
     private FragmentSecondBinding binding;
@@ -93,10 +96,12 @@ public class LogSummaryFragment extends Fragment {
         // Clear existing views from the table to prevent duplicates.
         binding.dataTableLayout.removeAllViews();
 
+        // get summary
         ArrayList<Pair<String, String>> emoticonProcessed = emoticonDataProcessor.processEmoticons();
         DisplaySummary summaryDisplay = new DisplaySummary(emoticonProcessed);
         HashMap<String, String> summary = summaryDisplay.getSummaryForDate(date);
 
+        // populate table
         ArrayList<TableRow> rows = tablePopulator.populate(binding.dataTableLayout, summary);
 
         for (TableRow row : rows) {

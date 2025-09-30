@@ -9,6 +9,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/*
+Provides a method to create an ArrayList of table rows, with each row representing one entry in the
+summary table.
+ */
 public class TablePopulator {
     private Context context;
 

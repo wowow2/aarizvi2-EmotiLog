@@ -4,6 +4,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+/*
+Formats a date object into a string, using SimpleDateFormat. User can format any date object to
+desired pattern via formatDate.
+*/
 public class DateFormatter {
     private SimpleDateFormat dateFormat;
 

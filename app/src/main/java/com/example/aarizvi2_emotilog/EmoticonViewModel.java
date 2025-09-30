@@ -6,6 +6,10 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
 
+/*
+The emoticon view model allows for the ArrayList of all emoticons and the load/save functionality to
+be accessed by both fragments.
+ */
 public class EmoticonViewModel extends ViewModel {
     private ArrayList<Emoticon> allEmoticons;
     private final EmoticonDatabase emoticonDatabase;

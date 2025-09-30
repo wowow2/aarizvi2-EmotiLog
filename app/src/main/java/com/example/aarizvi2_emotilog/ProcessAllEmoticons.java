@@ -7,6 +7,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+/*
+Support converting an array of emoticon objects into a pair of strings representing the type and date.
+Also support getting specific timestamps of each emoticon. Can convert the string data into formatted
+strings for logs as well.
+ */
 public class ProcessAllEmoticons {
     private ArrayList<Emoticon> allEmoticons = new ArrayList<>();
     ProcessAllEmoticons(ArrayList<Emoticon> allEmoticons) {

@@ -12,6 +12,12 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 
+/*
+DisplaySummary computes the summary statistics for a target date (the total count and frequency),
+the class has the full list of all emoticons logged, and the getSummaryForDate method takes in a date
+and iterates over log to identify emoticons on that date. It returns a hash map of each emoticon mapped
+to a count and frequency.
+*/
 public class DisplaySummary {
 
     private ArrayList<Pair<String, String>> allEmoticons;

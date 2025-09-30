@@ -5,6 +5,10 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+/*
+Represents an emoticon, it holds the kind of emoticon, the date and timestamp. The timestamp is
+derived from the date.
+*/
 public class Emoticon implements Serializable {
     private String emotion;
     private Date date;

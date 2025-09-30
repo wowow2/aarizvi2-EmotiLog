@@ -13,6 +13,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+/*
+To allow for user to see summaries of previous days in a user friendly way, this class provides methods
+to save the ArrayList containing all emoticons to a file, load all emoticons from the file, and clear
+the saved emoticons.
+ */
 public class EmoticonDatabase {
     public void saveArrayList(ArrayList<Emoticon> list, String filename, Context context) {
         try {

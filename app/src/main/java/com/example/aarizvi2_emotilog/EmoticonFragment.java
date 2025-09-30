@@ -16,7 +16,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-
+/*
+UI for the screen displaying buttons where the user can press buttons to log emotions. There is also
+the clear database button, which lets the user clear previous logs.
+ */
 public class EmoticonFragment extends Fragment {
 
     private FragmentFirstBinding binding;
