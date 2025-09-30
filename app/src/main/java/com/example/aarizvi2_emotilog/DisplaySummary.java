@@ -49,6 +49,10 @@ public class DisplaySummary {
                 double frequency = (double) count / totalForDate;
                 summary.put(emoticon, count + " (" + String.format(Locale.getDefault(), "%.1f", frequency * 100) + "%)");
             }
+            summary.put("Total Count", Integer.toString(totalForDate));
+        }
+        else {
+            summary.put("Total Count", Integer.toString(0));
         }
         return summary;
     }

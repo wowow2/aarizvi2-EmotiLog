@@ -29,6 +29,7 @@ public class TablePopulator {
             Log.w("TablePopulator", "TableLayout only contains header or is empty, cannot remove views starting from index 1.");
         }
 
+        TableRow total_row = new TableRow(context);
         for (String emoticon : summary.keySet()) {
             String summaryText = summary.get(emoticon);
 
@@ -46,8 +47,14 @@ public class TablePopulator {
             row.addView(emoticonTextView);
             row.addView(countFrequencyTextView);
 
-            rows.add(row);
+            if (emoticon.equals("Total Count")) {
+                total_row = row;
+            }
+            else {
+                rows.add(row);
+            }
         }
+        rows.add(total_row);
         return rows;
     }
 }
